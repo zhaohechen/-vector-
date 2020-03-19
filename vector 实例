@@ -1,0 +1,47 @@
+<c++>
+int main(){
+      vector<int> v1;
+//    int d = 0;
+//    ofstream ofs("/Users/chenzhaohe/Desktop/test01.txt",ios::out);//用来从键盘读入
+//    while(cin >> d)//当遇到command+z时停止输入
+//    {
+//        ofs <<" "<< d;
+//    }
+    ifstream ifs("/Users/chenzhaohe/Desktop/test01.txt",ios::in);
+    int temp;
+    if ( !ifs.is_open())
+    {
+        cout << "file error!" << endl;
+    }
+    while(ifs >> temp)
+    {
+        v1.push_back(temp);
+        cout << temp << " " ;//检验vector里的容器是否f读入数据正确
+    }
+        cout << endl;
+        cout << "v1的大小为：" <<v1.size() << endl;
+            if(v1.size() % 2 == 0)//偶数用的c++专用的迭代器，感觉手感一般
+            {
+                cout << "相邻两个元素的和分别为：" << endl;
+                for(auto i = v1.begin(); i != v1.end()-1; i++)//v1.end()指向最后一个元素的下一个位置即为空元素
+                {
+                    cout << *i + *(i+1) << "  ";
+                }
+            }
+            else if (v1.size() % 2 != 0)//奇数用的下标，果然舒服
+            {
+                cout << "因为是奇数个，所以最后一个元素无配对" << endl;
+                cout << "头尾两个元素之和为：" << endl;
+                for(int i = 0; i!=v1.size();i++)
+                {
+                    if (i <= v1.size() / 2)//防止从前往后又加一遍
+                    {
+                    cout << v1[v1.size()-1-i] + v1[i] << endl;
+                    }
+                }
+                cout << endl;
+            }
+    cout << endl;
+    ifs.close();
+    return 0;
+}
